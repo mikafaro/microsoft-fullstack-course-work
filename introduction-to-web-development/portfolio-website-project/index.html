@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Website</title>
+    <meta name="description" content="Mikael Færøvik's portfolio showcasing projects and skills.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Portfolio</h1>
+        <nav aria-label="Main navigation">
+            <ul role="menubar">
+                <li role="none"><a href="#about" role="menuitem">About Me</a></li>
+                <li role="none"><a href="#projects" role="menuitem">Projects</a></li>
+                <li role="none"><a href="#contact" role="menuitem">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Hello! I'm Mikael Færøvik, a passionate developer with a love for creating great software.</p>
+        <p>I specialize in back-end development, but I also have experience with front-end technologies.</p>
+        <p>In my free time, I enjoy learning new programming languages and frameworks.</p>
+    </section>
+    <section id="projects">
+        <h2>My Projects</h2>
+        <ul>
+            <li>
+                <h3>Weather App</h3>
+                <p>A web application that provides real-time weather updates for any location. Built using HTML, CSS, and JavaScript with data fetched from a weather API.</p>
+            </li>
+            <li>
+                <h3>Task Manager</h3>
+                <p>A productivity tool to help users organize and manage their daily tasks. Built with HTML, CSS, and JavaScript, featuring local storage for data persistence.</p>
+            </li>
+            <li>
+                <h3>Cat Meme Generator</h3>
+                <p>A fun web app that allows users to create and share hilarious cat memes. Built with HTML, CSS, and JavaScript, featuring a random cat image API and customizable text overlays.</p>
+            </li>
+        </ul>
+    </section>
+    <section id="skills"></section>
+        <h2>My Skills</h2>
+        <ul>
+            <li>HTML5</li>
+            <li>CSS3</li>
+            <li>JavaScript (ES6+)</li>
+            <li>React</li>
+            <li>Node.js</li>
+            <li>Express.js</li>
+            <li>MongoDB</li>
+            <li>Git & GitHub</li>
+            <li>RESTful APIs</li>
+            <li>Agile Development</li>
+        </ul>
+    </section>
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <form action="https://example.com/submit-form" method="post" role="form">
+            <div>
+                <label for="name" id="name-label">Name:</label>
+                <input type="text" id="name" name="name" required aria-labelledby="name-label" aria-required="true">
+            </div>
+            <div>
+                <label for="email" id="email-label">Email:</label>
+                <input type="email" id="email" name="email" required aria-labelledby="email-label" aria-required="true">
+            </div>
+            <div>
+                <label for="message" id="message-label">Message:</label>
+                <textarea id="message" name="message" rows="5" required aria-labelledby="message-label" aria-required="true"></textarea>
+            </div>
+            <button type="submit" aria-label="Send message">Send Message</button>
+        </form>
+    </section>
+    <footer>
+        <p>&copy; 2025 Mikael Færøvik</p>
+    </footer>
+</body>
+</html>

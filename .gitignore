@@ -1,0 +1,56 @@
+# Gitignore for .NET Core / .NET Projects
+
+# build results
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+.vs/
+.vscode/launch.json # Often contains local debug paths
+
+# Blazor files
+wwwroot/_framework/blazor.server.js # If using Server, ignore in wwwroot source
+wwwroot/_framework/blazor.webassembly.js # Sometimes included, but needed for WASM, so *don't* ignore the one in your source wwwroot
+
+# Additions for Blazor WASM specifically
+# Ignore the generated files within the *published* wwwroot
+publish/
+
+# NuGet packages
+.nuget/
+packages/ # Older style
+
+# profiling results
+*.vsp
+*.sap
+
+# temporary files
+*~
+*.sou
+*.obj
+*.user
+*.ipch
+*.aps
+*.pch
+*.pdb
+*.idl
+*.lib
+*.ncb
+*.sbr
+*.sdf
+*.opensdf
+*.cache
+*.aps
+
+# Solution files
+*.sln
+
+# Editor-specific files that might not be part of the project
+.idea/ # JetBrains Rider/IntelliJ
+
+# Windows temporary files
+Thumbs.db
+
+# OSX files
+.DS_Store

@@ -1,4 +1,7 @@
 @inject DataService DataService;
+@using AdvancedBlazorComponents.Pages;
+
+<ChildComponent @ref="childComponent" OnNotifyParent="HandleNotification" />
 
 <ul>
     <p style="color:@ThemeColor;">This text should be colored light-blue</p>
@@ -8,6 +11,13 @@
 </ul>
 
 @code {
+    private ChildComponent childComponent;
+
+    private void HandleNotification(string message)
+    {
+        Console.WriteLine("Notification received from the child component");
+    }
+
     [Parameter]
     public string ThemeColor { get; set; } = "lightblue";
 }

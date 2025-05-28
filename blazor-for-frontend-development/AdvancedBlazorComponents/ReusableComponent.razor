@@ -1,0 +1,7 @@
+@inject DataService DataService;
+
+<ul>
+    @foreach (var item in DataService.GetData()){
+        <li>@item</li>
+    }
+</ul>

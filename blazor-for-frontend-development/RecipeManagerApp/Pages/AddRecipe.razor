@@ -1,0 +1,23 @@
+@page "/addrecipe"
+@inject NavigationManager NavigationManager
+
+@code
+{
+    private string recipeName;
+    private string recipeDescription;
+
+    private void SubmitRecipe()
+    {
+        // Logic for adding new recipe, not the focus of this example.
+        NavigationManager.NavigateTo("/");
+    }
+}
+
+<PageTitle>Add Recipe</PageTitle>
+
+<h3>Add a New Recipe</h3>
+<input @bind="recipeName" placeholder="Recipe Name" />
+<br />
+<textarea @bind="recipeDescription" placeholder="Recipe Description"></textarea>
+<br />
+<button @onclick="SubmitRecipe">Submit</button>

@@ -1,0 +1,28 @@
+<EditForm>
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <InputText id="name" class="form-control" @bind-Value="@feedback.Name" />
+        <ValidationMessage For="@(() => feedback.Name)" />
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <InputText id="email" type="email" class="form-control" @bind-Value="@feedback.Email" />
+        <ValidationMessage For="@(() => feedback.Email)" />
+    </div>
+
+    <div class="form-group">
+        <label for="comment">Comment:</label>
+        <InputTextArea id="comment" class="form-control" @bind-Value="@feedback.Comment" />
+        <ValidationMessage For="@(() => feedback.Comment)" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>
+
+@code {
+    private Feedback feedback = new Feedback();
+}

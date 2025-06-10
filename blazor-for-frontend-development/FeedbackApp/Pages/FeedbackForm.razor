@@ -1,7 +1,7 @@
-@page "/feedback";
-@inject FeedbackService FeedbackService;
+@page "/feedback"
+@inject FeedbackService FeedbackService
 
-<EditForm>
+<EditForm Model="@feedback" OnValidSubmit="HandleSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -23,7 +23,7 @@
         <ValidationMessage For="@(() => feedback.Comment)" />
     </div>
 
-    <button type="submit" class="btn btn-primary" onsubmit="HandleSubmit">Submit</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
     <a href="/feedback-list" class="btn btn-link">View Submitted Feedback</a>
 </EditForm>
 

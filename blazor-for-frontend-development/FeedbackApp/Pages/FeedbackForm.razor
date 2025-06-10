@@ -1,3 +1,6 @@
+@page "/feedback";
+@inject FeedbackService FeedbackService;
+
 <EditForm>
     <DataAnnotationsValidator />
     <ValidationSummary />
@@ -20,9 +23,24 @@
         <ValidationMessage For="@(() => feedback.Comment)" />
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" onsubmit="HandleSubmit">Submit</button>
+    <a href="/feedback-list" class="btn btn-link">View Submitted Feedback</a>
 </EditForm>
 
+@if (isSubmitted)
+{
+    <p>Thank you for your feedback!</p>
+}
+
 @code {
-    private Feedback feedback = new Feedback();
+    private Feedback feedback = new();
+    private bool isSubmitted = false;
+
+    private void HandleSubmit()
+    {
+        FeedbackService.AddFeedback(feedback);
+        feedback = new Feedback();
+        isSubmitted = true;
+    }
+    
 }

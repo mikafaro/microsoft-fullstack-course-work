@@ -7,7 +7,7 @@
 
 <h3>Register a New Event</h3>
 
-<EditForm Model="@eventModel" OnValidSubmit="HandleValidSubmit">
+<EditForm EditContext="@editContext" OnValidSubmit="HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -17,7 +17,7 @@
     </div>
     <div class="mb-3">
         <label for="eventDate" class="form-label">Event Date</label>
-        <InputDate id="eventDate" class="form-control" @bind-Value="eventModel.Date" />
+        <InputDate id="eventDate" class="form-control" @bind-Value="eventModel.Date"  />
     </div>
     <div class="mb-3">
         <label for="eventLocation" class="form-label">Location</label>
@@ -27,12 +27,26 @@
 </EditForm>
 
 @code {
-    private Event eventModel = new Event();
+    private Event eventModel;
+    private EditContext editContext;
+
+    protected override void OnInitialized()
+    {
+        ResetForm();
+    }
+
+    private void ResetForm()
+    {
+        eventModel = new Event { Date = DateTime.Today };
+        editContext = new EditContext(eventModel);
+    }
 
     private async Task HandleValidSubmit()
     {
         await EventService.CreateEventAsync(eventModel);
-        eventModel = new Event(); // Reset form
-        NavigationManager.NavigateTo("/eventlist"); // Redirect to events list
+        NavigationManager.NavigateTo("/eventlist");
+        // If you want to stay on the page and allow another entry, use:
+        // ResetForm();
+        // StateHasChanged();
     }
 }

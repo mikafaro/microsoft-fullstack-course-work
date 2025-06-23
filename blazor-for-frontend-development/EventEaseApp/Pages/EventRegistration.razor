@@ -1,0 +1,38 @@
+@page "/eventregistration"
+
+@inject EventEaseApp.Services.EventService EventService;
+@inject NavigationManager NavigationManager;
+
+@using EventEaseApp.Models;
+
+<h3>Register a New Event</h3>
+
+<EditForm Model="@eventModel" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <label for="eventName" class="form-label">Event Name</label>
+        <InputText id="eventName" class="form-control" @bind-Value="eventModel.Name" />
+    </div>
+    <div class="mb-3">
+        <label for="eventDate" class="form-label">Event Date</label>
+        <InputDate id="eventDate" class="form-control" @bind-Value="eventModel.Date" />
+    </div>
+    <div class="mb-3">
+        <label for="eventLocation" class="form-label">Location</label>
+        <InputText id="eventLocation" class="form-control" @bind-Value="eventModel.Location" />
+    </div>
+    <button type="submit" class="btn btn-primary">Register Event</button>
+</EditForm>
+
+@code {
+    private Event eventModel = new Event();
+
+    private async Task HandleValidSubmit()
+    {
+        await EventService.CreateEventAsync(eventModel);
+        eventModel = new Event(); // Reset form
+        NavigationManager.NavigateTo("/eventlist"); // Redirect to events list
+    }
+}

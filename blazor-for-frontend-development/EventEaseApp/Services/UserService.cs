@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using EventEaseApp.Models;
 
+// For in-memory storage of user registrations. Obviously just for the purpose of managing user info in a mock app.
+// Not focused on secure storage of user information.
+
 public class UserService
 {
     private readonly List<UserDetails> users = new();

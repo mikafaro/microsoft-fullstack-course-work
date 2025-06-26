@@ -11,12 +11,15 @@ namespace EventEaseApp.Services
     {
         private readonly List<UserDetails> users = new();
 
-        public bool Register(string username, string email, string password)
+        public async Task<bool> RegisterUserAsync(UserDetails user)
         {
-            if (users.Any(u => u.Username == username))
-                return false; // Username taken
+            // Simulate async work (e.g., database call)
+            await Task.Yield();
 
-            users.Add(new UserDetails { Username = username, Email = email, Password = password });
+            if (users.Any(u => u.Username == user.Username))
+            return false; // Username taken
+
+            users.Add(user);
             return true;
         }
 

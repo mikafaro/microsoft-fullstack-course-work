@@ -1,30 +1,39 @@
 @page "/eventregistration"
 
 @inject EventEaseApp.Services.EventService EventService;
+@inject EventEaseApp.Services.SessionState SessionState;
 @inject NavigationManager NavigationManager;
 
 @using EventEaseApp.Models;
 
 <h3>Register a New Event</h3>
 
-<EditForm EditContext="@editContext" OnValidSubmit="HandleValidSubmit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
+@if (SessionState.IsAuthenticated)
+{
+    <EditForm EditContext="@editContext" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
 
-    <div class="mb-3">
-        <label for="eventName" class="form-label">Event Name</label>
-        <InputText id="eventName" class="form-control" @bind-Value="eventModel.Name" />
-    </div>
-    <div class="mb-3">
-        <label for="eventDate" class="form-label">Event Date</label>
-        <InputDate id="eventDate" class="form-control" @bind-Value="eventModel.Date"  />
-    </div>
-    <div class="mb-3">
-        <label for="eventLocation" class="form-label">Location</label>
-        <InputText id="eventLocation" class="form-control" @bind-Value="eventModel.Location" />
-    </div>
-    <button type="submit" class="btn btn-primary">Register Event</button>
-</EditForm>
+        <div class="mb-3">
+            <label for="eventName" class="form-label">Event Name</label>
+            <InputText id="eventName" class="form-control" @bind-Value="eventModel.Name" />
+        </div>
+        <div class="mb-3">
+            <label for="eventDate" class="form-label">Event Date</label>
+            <InputDate id="eventDate" class="form-control" @bind-Value="eventModel.Date"  />
+        </div>
+        <div class="mb-3">
+            <label for="eventLocation" class="form-label">Location</label>
+            <InputText id="eventLocation" class="form-control" @bind-Value="eventModel.Location" />
+        </div>
+        <button type="submit" class="btn btn-primary">Register Event</button>
+    </EditForm>
+}
+else
+{
+    <p>Please log in to register a new event.</p>
+    NavigationManager.NavigateTo("/");
+}
 
 @code {
     private Event eventModel;

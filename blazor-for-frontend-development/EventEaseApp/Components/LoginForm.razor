@@ -1,0 +1,49 @@
+@using EventEaseApp.Models
+@inject EventEaseApp.Services.UserService UserService
+@inject EventEaseApp.Services.SessionState SessionState;
+
+<h3>Login</h3>
+
+@if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <div class="alert alert-danger">@ErrorMessage</div>
+}
+
+<EditForm Model="loginModel" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <InputText id="username" class="form-control" @bind-Value="loginModel.Username" />
+        <ValidationMessage For="@(() => loginModel.Username)" />
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <InputText id="password" type="password" class="form-control" @bind-Value="loginModel.Password" />
+        <ValidationMessage For="@(() => loginModel.Password)" />
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+</EditForm>
+
+@code {
+    // Using UserDetails as loginmodel because ths is a mock app.
+    // This would typically use a separate model for login.
+    private UserDetails loginModel = new();
+    private string ErrorMessage;
+
+    private async Task HandleValidSubmit()
+    {
+        var isValid = UserService.ValidateLogin(loginModel.Username, loginModel.Password);
+        if (isValid)
+        {
+            SessionState.SetUser(loginModel.Username);
+            ErrorMessage = string.Empty;
+            loginModel = new UserDetails(); // Reset the form after successful login
+        }
+        else
+        {
+            ErrorMessage = "Invalid username or password.";
+        }
+    }
+}

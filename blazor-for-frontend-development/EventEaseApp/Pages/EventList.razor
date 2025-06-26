@@ -1,32 +1,41 @@
 @page "/eventlist"
 
 @inject EventEaseApp.Services.EventService EventService;
+@inject EventEaseApp.Services.SessionState SessionState;
+@inject NavigationManager NavigationManager
 
-<h3>Events</h3>
+@if (SessionState.IsAuthenticated)
+{
+    <h3>Events</h3>
 
-@if (events == null)
-{
-    <p><em>Loading...</em></p>
-}
-else if (events.Count == 0)
-{
-    <p>No events available.</p>
+    @if (events == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else if (events.Count == 0)
+    {
+        <p>No events available.</p>
+    }
+    else
+    {
+        <ul>
+            @foreach (var eventItem in events)
+            {
+                <li>
+                    <a href="@($"eventdetails/{eventItem.Id}")">@eventItem.Name</a> - @eventItem.Date.ToShortDateString()
+                </li>
+            }
+        </ul>
+    }
+
+    <p>
+        <a class="btn btn-primary" href="eventregistration">Register New Event</a>
+    </p>
 }
 else
 {
-    <ul>
-        @foreach (var eventItem in events)
-        {
-            <li>
-                <a href="@($"eventdetails/{eventItem.Id}")">@eventItem.Name</a> - @eventItem.Date.ToShortDateString()
-            </li>
-        }
-    </ul>
+    NavigationManager.NavigateTo("/");
 }
-
-<p>
-    <a class="btn btn-primary" href="eventregistration">Register New Event</a>
-</p>
 
 @code {
     private List<EventEaseApp.Models.Event> events;

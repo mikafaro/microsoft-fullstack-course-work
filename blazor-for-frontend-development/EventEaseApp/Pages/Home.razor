@@ -1,7 +1,32 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
+@using EventEaseApp.Components
 
-<h1>Hello, world!</h1>
+@inject EventEaseApp.Services.SessionState SessionState;
 
-Welcome to your new app.
+<h1>Welcome to EventEase</h1>
+
+@if (SessionState.IsAuthenticated)
+{
+    <p>Hello, @SessionState.Username! You are logged in.</p>
+    <p>You may now view the <a href="/eventlist">Event List</a></p>
+}
+else
+{
+    <p>Please register or log in to continue.</p>
+
+    <RegistrationForm />
+    <LoginForm />
+}
+
+@code {
+    protected override void OnInitialized()
+    {
+        SessionState.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        SessionState.OnChange -= StateHasChanged;
+    }
+}
